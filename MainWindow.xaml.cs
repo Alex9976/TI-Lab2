@@ -15,14 +15,15 @@ using System.Windows.Shapes;
 
 namespace TILab2
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        Keys key = new Keys();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            key.GenerateKeys();
         }
     }
 }
