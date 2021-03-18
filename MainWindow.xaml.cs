@@ -21,13 +21,13 @@ namespace TILab2
 
             for (int i = 0; i < Source.Length; i++)
             {
-                Result[i] = FastPowFunc(Source[i], (ulong)Key[0], (ulong)Key[1]);
+                Result[i] = Power(Source[i], (ulong)Key[0], (ulong)Key[1]);
             }
 
             return Result;
         }
 
-        static ulong FastPowFunc(ulong Number, ulong Pow, ulong Mod)
+        static ulong Power(ulong Number, ulong Pow, ulong Mod)
         {
             ulong Result = 1;
             ulong Bit = Number % Mod;

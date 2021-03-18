@@ -130,7 +130,7 @@ namespace TILab2
         }
 
 
-        private static void GCD(long a, long b, out long x, out long y, out long d)
+        private static void EuclidEx(long a, long b, out long x, out long y, out long d)
         {
             long q, r, x1, x2, y1, y2;
 
@@ -169,9 +169,10 @@ namespace TILab2
         static long Reverse(long a, long n)
         {
             long x, y, d;
-            GCD(a, n, out x, out y, out d);
+            EuclidEx(a, n, out x, out y, out d);
 
-            if (d == 1) return x;
+            if (d == 1) 
+                return x;
 
             return 0;
 
