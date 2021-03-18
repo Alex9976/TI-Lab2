@@ -11,15 +11,15 @@
         <TextBox x:Name="textPubKey" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
         <Label x:Name="labelPrivKey" Content="Private key:" HorizontalAlignment="Left" Margin="395,10,0,0" VerticalAlignment="Top" Width="88"/>
         <TextBox x:Name="textPrivKey" HorizontalAlignment="Left" Height="23" Margin="395,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="369"/>
-        <Button x:Name="btnGenerateKeys" Content="Generate" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnGenerateKeys" Content="Generate" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="75" Click="btnGenerateKeys_Click"/>
         <TextBox x:Name="textInput" HorizontalAlignment="Left" Height="49" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
         <Label x:Name="labelInput" Content="Source:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="83"/>
-        <TextBox x:Name="textInput_Copy" HorizontalAlignment="Left" Height="48" Margin="10,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+        <TextBox x:Name="textCrypt" HorizontalAlignment="Left" Height="48" Margin="10,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
         <Label x:Name="labelResult" Content="Encrypted message:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Width="140"/>
-        <TextBox x:Name="textInput_Copy1" HorizontalAlignment="Left" Height="48" Margin="10,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+        <TextBox x:Name="textDecrypt" HorizontalAlignment="Left" Height="48" Margin="10,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
         <Label x:Name="labelDecrypt" Content="Decrypted message:" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top" Width="140"/>
-        <Button x:Name="btnEncrypt" Content="Encrypt" HorizontalAlignment="Left" Margin="372,164,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnDecrypt" Content="Decrypt" HorizontalAlignment="Left" Margin="372,256,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnEncrypt" Content="Encrypt" HorizontalAlignment="Left" Margin="372,164,0,0" VerticalAlignment="Top" Width="75" Click="btnEncrypt_Click"/>
+        <Button x:Name="btnDecrypt" Content="Decrypt" HorizontalAlignment="Left" Margin="372,256,0,0" VerticalAlignment="Top" Width="75" Click="btnDecrypt_Click"/>
 
     </Grid>
 </Window>

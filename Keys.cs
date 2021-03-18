@@ -9,25 +9,26 @@ namespace TILab2
 {
     class Keys
     {
-        
-        private ulong q;
+        static long[] FermaNum = new long[3] { 17, 257, 65537 };
 
-        private ulong p;
+        private long q;
 
-        public ulong Module;   
-        
-        public ulong SecretE { get; }
+        private long p;
 
-        public ulong PublicE { get; }
+        private long Module;
 
-        public ulong[] PrivateKey { get; }
+        private long SecretE;
 
-        public ulong[] PublicKey { get; }
+        private long e;
+
+        public long[] PrivateKey { get; }
+
+        public long[] PublicKey { get; }
 
         public Keys()
         {
-            PrivateKey = new ulong[2];
-            PublicKey = new ulong[2];
+            PrivateKey = new long[2];
+            PublicKey = new long[2];
         }
 
         public void GenerateKeys()
@@ -37,11 +38,11 @@ namespace TILab2
 
             while (!IsSimple)
             {
-                p = (ulong)random.Next(100000, 1000000);
+                p = random.Next(10000, 100000);
                 if (CheckNumber(p))
                 {
                     IsSimple = true;
-                    for (ulong i = 2; i < Math.Sqrt(p) + 1; i++)
+                    for (long i = 2; i < Math.Sqrt(p) + 1; i++)
                     {
                         if (p % i == 0)
                         {
@@ -55,11 +56,11 @@ namespace TILab2
             IsSimple = false;
             while (!IsSimple)
             {
-                q = (ulong)random.Next(100000, 1000000);
+                q = random.Next(10000, 100000);
                 if (CheckNumber(q))
                 {
                     IsSimple = true;
-                    for (ulong i = 2; i < Math.Sqrt(q) + 1; i++)
+                    for (long i = 2; i < Math.Sqrt(q) + 1; i++)
                     {
                         if (q % i == 0)
                         {
@@ -72,11 +73,25 @@ namespace TILab2
 
             Module = p * q;
 
+            long EulerFunc = (p - 1) * (q - 1);
+            e = FermaNum[random.Next(0, 2)];
+
+            PublicKey[0] = e;
+            PublicKey[1] = Module;
+
+            SecretE = Reverse(e, EulerFunc);
+            if (SecretE < 0) 
+                SecretE = EulerFunc + SecretE;
+            if (SecretE == 0)
+                GenerateKeys();
+
+            PrivateKey[0] = SecretE;
+            PrivateKey[1] = Module;
         }
 
-        private bool CheckNumber(ulong Num)
+        private bool CheckNumber(long Num)
         {
-            for (ulong i = 2; i < Num && i < 11; i++)
+            for (long i = 2; i < Num && i < 11; i++)
             {
                 if (!MillerRabinTest(Num, i))
                 {
@@ -86,24 +101,24 @@ namespace TILab2
             return true;
         }
 
-        private bool MillerRabinTest(ulong Num, ulong a)
+        private bool MillerRabinTest(long Num, long a)
         {
 
             if (Num % 2 == 0)
                 return false;
-            ulong s = 0, d = Num - 1;
+            long s = 0, d = Num - 1;
             while (d % 2 == 0)
             {
                 d /= 2;
                 s++;
             }
 
-            ulong r = 1;
-            ulong x = (ulong)BigInteger.ModPow(a, d, Num);
+            long r = 1;
+            long x = (long)BigInteger.ModPow(a, d, Num);
             if (x == 1 || x == Num - 1)
                 return true;
 
-            x = (ulong)BigInteger.ModPow((ulong)Math.Pow(a, d), (ulong)Math.Pow(2, r), Num);
+            x = (long)BigInteger.ModPow((long)Math.Pow(a, d), (long)Math.Pow(2, r), Num);
 
             if (x == 1)
                 return false;
@@ -112,6 +127,54 @@ namespace TILab2
                 return false;
 
             return true;
+        }
+
+
+        private static void GCD(long a, long b, out long x, out long y, out long d)
+        {
+            long q, r, x1, x2, y1, y2;
+
+            if (b == 0)
+            {
+                d = a;
+                x = 1;
+                y = 0;
+                return;
+            }
+
+            x2 = 1;
+            x1 = 0;
+            y2 = 0;
+            y1 = 1;
+
+            while (b > 0)
+            {
+                q = a / b;
+                r = a - q * b;
+                x = x2 - q * x1;
+                y = y2 - q * y1;
+                a = b;
+                b = r;
+                x2 = x1;
+                x1 = x;
+                y2 = y1;
+                y1 = y;
+            }
+
+            d = a;
+            x = x2;
+            y = y2;
+        }
+
+        static long Reverse(long a, long n)
+        {
+            long x, y, d;
+            GCD(a, n, out x, out y, out d);
+
+            if (d == 1) return x;
+
+            return 0;
+
         }
 
     }
