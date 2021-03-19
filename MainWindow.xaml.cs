@@ -21,29 +21,26 @@ namespace TILab2
 
             for (int i = 0; i < Source.Length; i++)
             {
-                Result[i] = Power(Source[i], (ulong)Key[0], (ulong)Key[1]);
+                Result[i] = (ulong)Power(Source[i], Key[0], Key[1]);
             }
 
             return Result;
         }
 
-        static ulong Power(ulong Number, ulong Pow, ulong Mod)
+        static BigInteger Power(BigInteger a, BigInteger z, BigInteger n)
         {
-            ulong Result = 1;
-            ulong Bit = Number % Mod;
-
-            while (Pow > 0)
+            BigInteger a1 = a, z1 = z, x = 1;
+            while (z1 != 0)
             {
-                if ((Pow & 1) == 1)
+                while (z1 % 2 == 0)
                 {
-                    Result *= Bit;
-                    Result %= Mod;
+                    z1 = z1 / 2;
+                    a1 = (a1 * a1) % n;
                 }
-                Bit *= Bit;
-                Bit %= Mod;
-                Pow >>= 1;
+                z1 = z1 - 1;
+                x = (x * a1) % n;
             }
-            return Result;
+            return x;
         }
 
         private void btnEncrypt_Click(object sender, RoutedEventArgs e)
