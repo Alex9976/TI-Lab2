@@ -84,9 +84,11 @@ namespace TILab2
                 SecretE = EulerFunc + SecretE;
             if (SecretE == 0)
                 GenerateKeys();
-
-            PrivateKey[0] = SecretE;
-            PrivateKey[1] = Module;
+			else
+			{
+				PrivateKey[0] = SecretE;
+				PrivateKey[1] = Module;
+			}
         }
 
         private bool CheckNumber(long Num)
